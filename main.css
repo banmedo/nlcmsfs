@@ -9,11 +9,11 @@ html, body, .clean-fit {
 .banner{
   background: #144238;
   color:#fff;
-  height:50px;
+  height:6%;
   text-align:center;
   font-weight: bold;
   padding:5px 10px;
-  font-size:25px
+  font-size:150%;
 }
 
 #title{
@@ -22,7 +22,7 @@ html, body, .clean-fit {
 
 
 .main-body{
-  height:calc(100% - 50px);
+  height:94%;
   width:100%;
   margin:0;
   overflow:auto;
@@ -48,5 +48,6 @@ html, body, .clean-fit {
   text-align:justify;
 }
 .f12{
-  font-size:12px;
+  /* font-size:12px; */
+  font-size:80%;
 }

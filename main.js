@@ -21,15 +21,66 @@ function _getMapURL (year){
   return tmsLayers[year]
 }
 
-var southWest = L.latLng(25.179286341268874, 79.28012528406266),
-    northEast = L.latLng(31.704049614274282, 88.87118973718765),
-    bounds = L.latLngBounds(southWest, northEast);
+function _timeChanged(e){
+  console.log(e);
+}
 
+function _setupMap(){
+  var southWest = L.latLng(25.179286341268874, 79.28012528406266),
+      northEast = L.latLng(31.704049614274282, 88.87118973718765),
+      bounds = L.latLngBounds(southWest, northEast);
 
-var map = L.map('map',{
-  maxBounds: bounds,
-  minZoom:7
-}).setView([28.44166797777158, 84.07565751062515], 7);
+  var map = L.map('map',{
+    maxBounds: bounds,
+    minZoom:7
+  }).setView([28.44166797777158, 84.07565751062515], 7);
+
+  return map
+}
+
+function _addTimeSlider(map){
+  // L.Control.timeSlider = L.Control.extend({
+  //   onAdd:function(map){
+  //     console.log(map);
+  //     var img = L.DomUtil.create('img');
+  //
+  // 		img.src = '../../docs/images/logo.png';
+  // 		img.style.width = '200px';
+  //     return img;
+  //   },
+  //   onRemove:function(map){
+  //     console.log('control removed from map');
+  //   }
+  // });
+  //
+  // L.control.timeSlider = function(opts) {
+  // 	return new L.Control.timeSlider(opts);
+  // }
+  //
+  // var slider = L.control.timeSlider({position:'bottom'});
+  // slider.addTo(map);
+  // return slider
+  L.Control.TimeSlider = L.Control.extend({
+  	onAdd: function(map) {
+  		var img = L.DomUtil.create('div');
+  		return img;
+  	},
+
+  	onRemove: function(map) {
+  		// Nothing to do here
+  	}
+  });
+
+  L.control.timeSlider = function(opts) {
+  	return new L.Control.TimeSlider(opts);
+  }
+
+  L.control.timeSlider({ position: 'bottomleft' }).addTo(map);
+}
+
+// steps to initiate
+var map = _setupMap();
+var timeSlider = _addTimeSlider(map);
 
 var mapurl = _getMapURL(2018);
 

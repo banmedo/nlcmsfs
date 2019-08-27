@@ -3,12 +3,50 @@ html, body, .clean-fit {
   width:100%;
   padding:0;
   margin:0;
+  font-family: 'Roboto', sans-serif;
 }
 
 .banner{
-  background: #166151;
+  background: #144238;
+  color:#fff;
+  height:50px;
+  text-align:center;
+  font-weight: bold;
+  padding:5px 10px;
+  font-size:25px
+}
+
+#title{
+  cursor:default;
+}
+
+
+.main-body{
+  height:calc(100% - 50px);
+  width:100%;
+  margin:0;
+  overflow:auto;
 }
 
 #map{
+  padding:0;
+  margin:0;
+  height:100%;
+}
+#options{
+  height:100%;
+  padding:5px;
+  margin:0;
+  overflow-y:auto;
+}
 
+
+
+
+
+.justify{
+  text-align:justify;
+}
+.f12{
+  font-size:12px;
 }

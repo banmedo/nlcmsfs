@@ -4,29 +4,81 @@
     <meta charset="utf-8">
     <title>NLCMS Feedback System</title>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous" />
+
     <link rel="stylesheet" href="main.css">
+
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark banner">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div class="banner">
+      <span id="title"> NLCMS Feedback System </span>
+    </div>
+    <div class="row main-body">
+      <div class="col-sm-8" id="map">
 
-      <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">NLCMS Feedback System</a>
-          </li>
-        </ul>
       </div>
-    </nav>
-
+      <div class="col-sm-4" id="options">
+        <div class="justify f12">
+          <p>The NLCMS Feedback System is a web portal where you can check the Nepal land cover maps pre-launched on 23rd August 2019. You can select the year for which you would like to inspect the land cover. The opacity of land cover layer can be adjusted for switching the view between Landsat image or the land cover map. The point in map indicates the coordinate that you are providing the feedback for. You can drag the point marker or simply click on map to change the location of your comment. Please fill up the form below and press "submit" to submit your feedback.
+          </p>
+          <p>
+            Note: The field marked with * are mandatory. Name and email address are optional. We will only use them in case we need to get back to you on specifics regarding your feedback so that you can better assist us in improving the product.
+          </p>
+        </div>
+        <form class="f12" id="feedbackForm" method="get">
+          <div class="form-group">
+            <label for="comments"><b>Your comments on selected point for selected year*</b></label>
+            <textarea class="form-control f12" id="comments" rows="3" required>asdasd</textarea>
+          </div>
+          <div class="form-group">
+            <label for="suggestedClass"><b>What should the land cover be instead?*</b></label>
+            <select id="suggestedClass" class="form-control f12" placeholder="Select a land cover" required>
+              <option value="" disabled >Select a land cover</option>
+              <option value="barerock" selected>Bare rock</option>
+              <option value="baresoil">Bare soil</option>
+              <option value="cropland">Cropland</option>
+              <option value="forest">Forest</option>
+              <option value="glacier">Glacier</option>
+              <option value="grassland">Grassland</option>
+              <option value="owl">Other Wooded lands</option>
+              <option value="riverbed">River bed</option>
+              <option value="settlement">Settlement</option>
+              <option value="snow">Snow</option>
+              <option value="wetland">Wetland</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="source"><b>What is the source of your information?*</b></label>
+            <select id="source" class="form-control f12" placeholder="Select a land cover" required>
+              <option value="" disabled >Select the source of your knowledge</option>
+              <option value="local" selected>Local knowledge</option>
+              <option value="photos">Personal photos</option>
+              <option value="thirdparty">Third Party (friend, etc.)</option>
+              <option value="image">Visual Interpretation on satellite imagery</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="name"><b>Enter your full name (optional)</b></label>
+            <input type="text" class="form-control f12" id="name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label for="email"><b>Enter your email address (optional)</b></label>
+            <input type="email" class="form-control f12" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your name and email with anyone else.</small>
+          </div>
+          <button type="submit" class="btn btn-success f12">Submit</button>
+        </form>
+      </div>
+    </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha256-CjSoeELFOcH0/uxWu6mC/Vlrc1AARqbm/jiiImDGV3s=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+
     <script src="main.js"></script>
   </body>
 </html>

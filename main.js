@@ -47,8 +47,11 @@ function _setupMap(){
 
   var map = L.map('map',{
     maxBounds: bounds,
-    minZoom:7
+    minZoom:7,
   }).setView([28.44166797777158, 84.07565751062515], 7);
+
+  var osmbg = L.tileLayer.wms('http://full.wms.geofabrik.de/std/demo_key?').addTo(map);
+  map.attributionControl.addAttribution('<a href="https://www.openstreetmap.org/">OpenStreetMap</a>');
 
   return map;
 }
@@ -61,7 +64,7 @@ function _timeChanged(e){
     "Land Cover" : L.tileLayer(mapurl[0]),
     "Composite" : L.tileLayer(mapurl[1])
   };
-  L.control.layers(layers).addTo(map);
+  L.control.layers({},layers).addTo(map);
   layers["Land Cover"].addTo(map);
 }
 

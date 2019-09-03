@@ -47,6 +47,10 @@ html, body, .clean-fit {
 .justify{
   text-align:justify;
 }
+.gray{
+  color:gray;
+  font-style:italic;
+}
 .f12{
   /* font-size:12px; */
   font-size:80%;

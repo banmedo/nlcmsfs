@@ -96,16 +96,50 @@ map.on('click', _updateMarker);
 $("#feedbackForm").on('submit',function(e){
   e.preventDefault();
   if (!marker){
-    $('.modal-body p').html("Please click at the location in map where you want to make your comment!");
-    $('.modal').modal();
+    $('#alertmodal p').html("Please click at the location in map where you want to make your comment!");
+    $('#alertmodal').modal();
     return;
   }
   var data = {
+    lat : marker._latlng.lat,
+    lng : marker._latlng.lat,
+    year : 2018,
     comments : $("#comments").val(),
     suggestedClass : $("#suggestedClass").val(),
     source : $("#source").val(),
     name : $("#name").val(),
     email : $("#email").val()
   }
-  console.log(data);
+
+  var table = '<table>';
+  table +='<tr><th>Comments </th><td>'+data.comments+'</td></tr>';
+  table +='<tr><th>Suggested Class </th><td>'+data.suggestedClass+'</td></tr>';
+  table +='<tr><th>Source of information</th><td>'+data.source+'</td></tr>';
+  table +='<tr><th>Name</th><td>'+(data.name || '<span class="gray">unspecified</span>')+'</td></tr>';
+  table +='<tr><th>eMail address</th><td>'+(data.email || '<span class="gray">unspecified</span>')+'</td></tr>';
+  table +='<tr><th>for year </th><td>'+data.year+'</td></tr>';
+  table +='<tr><th>for location </th><td>'+data.lat+','+data.lon+'</td></tr>';
+  table +='</table>';
+
+  $('#confirmmodal p').html(table);
+  $('#confirmmodal').modal();
+
+  $('#confirmSubmit').on('click',submitData);
+
+  function submitData(e){
+    $('#confirmSubmit').off('click',submitData);
+    $('#confirmmodal').modal('hide');
+    $('#alertmodal p').html("Submitting your feedback!");
+    // $('#alertmodal').modal({backdrop:'static',keyboard:false});
+    console.log(data);
+    // $.ajax({
+    //   url:,
+    //   data:,
+    //   success:function(resp){
+    //     $('#alertmodal').modal('hide');
+    //     $('#alertmodal').modal({backdrop:true,keyboard:true});
+    //   }
+    // })
+  }
+
 })

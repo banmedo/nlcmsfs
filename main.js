@@ -15,7 +15,7 @@ var classTmsLayers = {2000: 'https://earthengine.googleapis.com/map/7c5304981270
   2015: 'https://earthengine.googleapis.com/map/59fe5aefc1a3a1aba9f3fa5607ed65a5/{z}/{x}/{y}?token=703ff6949bfd73875e21b4dd1999d30b',
   2016: 'https://earthengine.googleapis.com/map/e8569644015cb85a41b1a12053b35920/{z}/{x}/{y}?token=79cfa9814d297f5295ede15ccad24066',
   2017: 'https://earthengine.googleapis.com/map/06625d8d6f58a5a822f648b36fd7e345/{z}/{x}/{y}?token=088f2e60301011c4ea30f30bdb9be0d8',
-  2018: 'https://earthengine.googleapis.com/map/bbe3cd2b03643b28a987e71b09163fb0/{z}/{x}/{y}?token=62d91726110c792867b7f47f0e05745c'}
+  2018: 'http://geoapps.icimod.org/icimodarcgis/rest/services/Nepal/NLCMS/MapServer/'}
 
 var compTmsLayers = {2000: 'https://earthengine.googleapis.com/map/35cc2583c0aa21264a3b6f9491ba4572/{z}/{x}/{y}?token=21e7082daeaa46c3e3eba0cf4c9e9a6b',
   2001: 'https://earthengine.googleapis.com/map/62fa54f9423561a5c3a4461f18bf2b74/{z}/{x}/{y}?token=d8bef8fafbb89b7e5c1660a1ce93cbbe',
@@ -47,7 +47,7 @@ function _setupMap(){
 
   var map = L.map('map',{
     maxBounds: bounds,
-    minZoom:7,
+    // minZoom:7,
   }).setView([28.44166797777158, 84.07565751062515], 7);
 
   var osmbg = L.tileLayer.wms('http://full.wms.geofabrik.de/std/demo_key?').addTo(map);
@@ -56,12 +56,55 @@ function _setupMap(){
   return map;
 }
 
+function _addLegend(map){
+  L.Control.Legend = L.Control.extend({
+    onAdd: function(map){
+      var legend = L.DomUtil.create('div');
+      $.ajax({
+        url:'http://geoapps.icimod.org/icimodarcgis/rest/services/Nepal/NLCMS/MapServer/legend?f=json',
+        success:function(response){
+          response = JSON.parse(response);
+          var legendObj = response.layers[0].legend;
+          var legendTxt = '<h5>Land Cover</h5>'
+          var table = '<table>';
+          for (var i=0; i<legendObj.length; i++){
+            table += '<tr valign="middle"><td><img src="data:/image/png;base64,'+legendObj[i].imageData+'" alt="'+legendObj[i].label+'"></td>';
+            table += '<td>'+legendObj[i].label+'</td></tr>'
+          }
+          table+='</table>';
+          console.log(table);
+          $(legend).html(legendTxt+table);
+          // <table class="formTable">
+          // <tbody><tr>
+          // <td>
+          // <b>Land Cover 2018 (0)</b>
+          // <table>
+          // <tbody><tr valign="middle">
+          // <td><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAD1JREFUOI1jYaAyYKGlgf+pYB4jigsfXX5BtklyuhIMDAw09vKogaMGjho4aiB2A2FFEJmAEd1ARkpMgwEA0ssEtji4uL0AAAAASUVORK5CYII=" alt="Barerock">
+          // </td><td>Barerock</td>
+        }
+      })
+  		return legend;
+    },
+    onRemove: function(map) {
+  		// Nothing to do here
+  	}
+  });
+  L.control.legend = function(opts) {
+  	return new L.Control.Legend(opts);
+  }
+
+  L.control.legend({ position: 'bottomleft' }).addTo(map);
+}
+
 
 function _timeChanged(e){
   var year = 2018;
   var mapurl = _getMapURL(year);
   var layers = {
-    "Land Cover" : L.tileLayer(mapurl[0]),
+    "Land Cover" : L.esri.dynamicMapLayer({
+                      url: mapurl[0]
+                    }),
     "Composite" : L.tileLayer(mapurl[1])
   };
   L.control.layers({},layers).addTo(map);
@@ -88,7 +131,7 @@ function _updateMarker(e){
 var map = _setupMap();
 var marker = false;
 _timeChanged();
-
+_addLegend(map);
 
 
 map.on('click', _updateMarker);

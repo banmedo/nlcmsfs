@@ -30,13 +30,13 @@
         <form class="f12" id="feedbackForm" method="get">
           <div class="form-group">
             <label for="comments"><b>Your comments on selected point for selected year*</b></label>
-            <textarea class="form-control f12" id="comments" rows="3" required></textarea>
+            <textarea class="form-control f12" id="comments" rows="3" required>asdasd</textarea>
           </div>
           <div class="form-group">
             <label for="suggestedClass"><b>What should the land cover be instead?*</b></label>
             <select id="suggestedClass" class="form-control f12" placeholder="Select a land cover" required>
-              <option value="" disabled selected>Select a land cover</option>
-              <option value="barerock">Bare rock</option>
+              <option value="" disabled >Select a land cover</option>
+              <option value="barerock" selected>Bare rock</option>
               <option value="baresoil">Bare soil</option>
               <option value="cropland">Cropland</option>
               <option value="forest">Forest</option>
@@ -52,8 +52,8 @@
           <div class="form-group">
             <label for="source"><b>What is the source of your information?*</b></label>
             <select id="source" class="form-control f12" placeholder="Select a land cover" required>
-              <option value="" disabled selected>Select the source of your knowledge</option>
-              <option value="local">Local knowledge</option>
+              <option value="" disabled >Select the source of your knowledge</option>
+              <option value="local" selected>Local knowledge</option>
               <option value="photos">Personal photos</option>
               <option value="thirdparty">Third Party (friend, etc.)</option>
               <option value="image">Visual Interpretation on satellite imagery</option>

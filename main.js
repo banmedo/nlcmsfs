@@ -1,6 +1,6 @@
 var classTmsLayers = {2018: 'http://geoapps.icimod.org/icimodarcgis/rest/services/Nepal/NLCMS/MapServer/'}
 
-var compTmsLayers = {2018: 'https://earthengine.googleapis.com/map/c060dde6c6470e6355c8da5b26b130dc/{z}/{x}/{y}?token=cf41ba7e98520ea1e2c8df3b4fddd4bf'}
+var compTmsLayers = {2018: 'http://geoapps.icimod.org/icimodarcgis/rest/services/Nepal/NepalComposite2018/MapServer/'}
 
 function _getMapURL (year){
   return [classTmsLayers[year],compTmsLayers[year]];
@@ -62,7 +62,9 @@ function _timeChanged(e){
     "Land Cover" : L.esri.dynamicMapLayer({
                       url: mapurl[0]
                     }),
-    "Composite" : L.tileLayer(mapurl[1])
+    "Composite" : L.esri.dynamicMapLayer({
+                      url: mapurl[1]
+                    })
   };
   L.control.layers({},layers).addTo(map);
   layers["Land Cover"].addTo(map);
@@ -93,6 +95,7 @@ _addLegend(map);
 
 map.on('click', _updateMarker);
 
+
 $("#feedbackForm").on('submit',function(e){
   e.preventDefault();
   if (!marker){
@@ -102,7 +105,7 @@ $("#feedbackForm").on('submit',function(e){
   }
   var data = {
     lat : marker._latlng.lat,
-    lng : marker._latlng.lat,
+    lon : marker._latlng.lng,
     year : 2018,
     comments : $("#comments").val(),
     suggestedClass : $("#suggestedClass").val(),
@@ -123,7 +126,6 @@ $("#feedbackForm").on('submit',function(e){
 
   $('#confirmmodal p').html(table);
   $('#confirmmodal').modal();
-
   $('#confirmSubmit').on('click',submitData);
 
   function submitData(e){
@@ -132,11 +134,11 @@ $("#feedbackForm").on('submit',function(e){
     $('#alertmodal p').html("Submitting your feedback!");
     $('#alertmodal').modal({backdrop:'static',keyboard:false});
     $.ajax({
-      url:'http://192.168.11.57:1234/api/feedback',
+      url:'http://192.168.11.57/feedback/api/feedbacks',
       data:data,
-      type:'post',
+      dataType:'text',
+      type:'POST',
       success:function(resp){
-        console.log(resp);
         $('#alertmodal').modal('hide');
         $('#alertmodal p').html("Your feedback was successfully submitted!");
         $('#alertmodal').modal({backdrop:true,keyboard:true});

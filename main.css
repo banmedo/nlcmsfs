@@ -39,8 +39,15 @@ html, body, .clean-fit {
   margin:0;
   overflow-y:auto;
 }
+.legend{
+  background:rgba(255,255,255,0.8);
+  padding:5px;
+  outline:solid black 1px;
+}
 
-
+.legend:hover{
+  opacity:0.3;
+}
 
 
 
@@ -52,6 +59,8 @@ html, body, .clean-fit {
   font-style:italic;
 }
 .f12{
-  /* font-size:12px; */
   font-size:80%;
+}
+.f90{
+  font-size:90%;
 }

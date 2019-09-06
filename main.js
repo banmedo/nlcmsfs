@@ -92,7 +92,7 @@ function _timeChanged(e){
           }),
 
   };
-  L.control.layers(basemaps,layers).addTo(map);
+  L.control.layers(basemaps,layers,{collapsed:false}).addTo(map);
 
   L.control.opacity(
     layers,

@@ -69,6 +69,9 @@ html, body, .clean-fit {
   color:gray;
   font-style:italic;
 }
-.f12,.f90{
+.f90{
   font-size:90%;
+}
+.f80{
+  font-size:80%;
 }

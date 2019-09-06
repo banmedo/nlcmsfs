@@ -22,17 +22,19 @@
     </div>
     <div class="row main-body">
       <div class="col-sm-8" id="map">
-
       </div>
       <div class="col-sm-4" id="options">
-        <form class="f12" id="feedbackForm" method="get">
+        <p class="f80">Click on the map to identify the location that you want to make comment on.<br>
+          Note: The field marked with * are mandatory. Name and email address are optional. We will only use them in case we need to get back to you on specifics regarding your feedback so that you can better assist us in improving the product.
+        </p>
+        <form class="f90" id="feedbackForm" method="get">
           <div class="form-group">
             <label for="comments"><b>Your comments on selected point for selected year*</b></label>
-            <textarea class="form-control f12" id="comments" rows="3" required></textarea>
+            <textarea class="form-control f90" id="comments" rows="3" required></textarea>
           </div>
           <div class="form-group">
             <label for="suggestedClass"><b>What should the land cover be instead?*</b></label>
-            <select id="suggestedClass" class="form-control f12" placeholder="Select a land cover" required>
+            <select id="suggestedClass" class="form-control f90" placeholder="Select a land cover" required>
               <option value="" disabled selected>Select a land cover</option>
               <option value="barerock">Bare rock</option>
               <option value="baresoil">Bare soil</option>
@@ -49,7 +51,7 @@
           </div>
           <div class="form-group">
             <label for="source"><b>What is the source of your information?*</b></label>
-            <select id="source" class="form-control f12" placeholder="Select a land cover" required>
+            <select id="source" class="form-control f90" placeholder="Select a land cover" required>
               <option value="" disabled selected>Select the source of your knowledge</option>
               <option value="local">Local knowledge</option>
               <option value="photos">Personal photos</option>
@@ -59,14 +61,14 @@
           </div>
           <div class="form-group">
             <label for="name"><b>Enter your full name (optional)</b></label>
-            <input type="text" class="form-control f12" id="name" placeholder="Full name">
+            <input type="text" class="form-control f90" id="name" placeholder="Full name">
           </div>
           <div class="form-group">
             <label for="email"><b>Enter your email address (optional)</b></label>
-            <input type="email" class="form-control f12" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control f90" id="email" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your name and email with anyone else.</small>
           </div>
-          <button type="submit" class="btn btn-success f12">Submit</button>
+          <button type="submit" class="btn btn-success f90">Submit</button>
           <div class="form-group">
             <small> <b>Disclaimer</b> The district layer is shared only to assist the feedback process and is not supposed accurately
               represent the administrative boundaries.</small>
@@ -88,9 +90,6 @@
         <div class="modal-content">
           <div class="modal-body">
             <p>The NLCMS Feedback System is a web portal where you can check the Nepal land cover maps pre-launched on 23rd August 2019. You can select the year for which you would like to inspect the land cover. The opacity of land cover layer can be adjusted for switching the view between Landsat image or the land cover map. The point in map indicates the coordinate that you are providing the feedback for. You can drag the point marker or simply click on map to change the location of your comment. Please fill up the form below and press "submit" to submit your feedback.
-            </p>
-            <p>
-              Note: The field marked with * are mandatory. Name and email address are optional. We will only use them in case we need to get back to you on specifics regarding your feedback so that you can better assist us in improving the product.
             </p>
           </div>
         </div>

@@ -16,7 +16,6 @@ function _setupMap(){
     // minZoom:7,
   }).setView([28.44166797777158, 84.07565751062515], 7);
 
-  var osmbg = L.tileLayer.wms('http://full.wms.geofabrik.de/std/demo_key?').addTo(map);
   map.attributionControl.addAttribution('<a href="https://www.openstreetmap.org/">OpenStreetMap</a>');
 
   return map;
@@ -58,40 +57,51 @@ function _addLegend(map){
 function _timeChanged(e){
   var year = 2018;
   var mapurl = _getMapURL(year);
+  var basemaps = {
+    "OpenStreetMap" : L.tileLayer.wms('http://full.wms.geofabrik.de/std/demo_key?').addTo(map)
+  }
   var layers = {
-    "Land Cover" : L.esri.dynamicMapLayer({
-                      url: mapurl[0]
-                    }),
     "Composite" : L.esri.dynamicMapLayer({
-                      url: mapurl[1]
-                    }),
+            url: mapurl[1]
+          }),
+    "Land Cover" : L.esri.dynamicMapLayer({
+            url: mapurl[0]
+          }),
     "Districts" : L.esri.dynamicMapLayer({
-                      url:'http://geoapps.icimod.org/icimodarcgis/rest/services/Nepal/Admin/MapServer',
-                      dynamicLayers:[{
-                        "id": 1,
-                        "source":{"type":"mapLayer","mapLayerId":1},
-                        "drawingInfo":{
-                          "renderer":{
-                            "type":"simple",
-                            "symbol":{
-                              "type":"esriSFS",
-                              "outline":{
-                                "type":"esriSLS",
-                                "style":"esriSLSSolid",
-                                "color":[0,0,0,255],
-                                "width":2
-                              }
-                            },
-                            "label":"DNM",
-                            "description":''
-                          }
-                        }
-                      }]
-                    }),
+            url:'http://geoapps.icimod.org/icimodarcgis/rest/services/Nepal/Admin/MapServer',
+            dynamicLayers:[{
+              "id": 1,
+              "source":{"type":"mapLayer","mapLayerId":1},
+              "drawingInfo":{
+                "renderer":{
+                  "type":"simple",
+                  "symbol":{
+                    "type":"esriSFS",
+                    "outline":{
+                      "type":"esriSLS",
+                      "style":"esriSLSSolid",
+                      "color":[0,0,0,255],
+                      "width":2
+                    }
+                  },
+                  "label":"DNM",
+                  "description":''
+                }
+              }
+            }]
+          }),
 
   };
-  L.control.layers({},layers).addTo(map);
+  L.control.layers(basemaps,layers).addTo(map);
+
+  L.control.opacity(
+    layers,
+    {
+      label: "Layers Opacity"
+    }
+  ).addTo(map);
   layers["Land Cover"].addTo(map);
+  layers["Composite"].addTo(map);
 }
 
 function _updateMarker(e){
@@ -118,6 +128,8 @@ _addLegend(map);
 
 
 map.on('click', _updateMarker);
+
+$('.banner button').on('click', function(e){ $("#infomodal").modal()});
 
 
 $("#feedbackForm").on('submit',function(e){

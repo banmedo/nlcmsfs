@@ -2,31 +2,29 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>NLCMS Feedback System</title>
+    <title>Feedback on National Land Cover Monitoring System</title>
     <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha256-YLGeXaapI0/5IgZopewRJcFXomhRMlYYjugPLSyNjTY=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
 
+    <link rel="stylesheet" href="L.Control.Opacity.css">
+
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
     <div class="banner">
-      <span id="title"> NLCMS Feedback System </span>
+      <span id="title"> Feedback on National Land Cover Monitoring System  </span>
+      <button type="button" class="btn btn-primary" data-toggle="modal">
+        ?
+      </button>
     </div>
     <div class="row main-body">
       <div class="col-sm-8" id="map">
 
       </div>
       <div class="col-sm-4" id="options">
-        <div class="justify f12">
-          <p>The NLCMS Feedback System is a web portal where you can check the Nepal land cover maps pre-launched on 23rd August 2019. You can select the year for which you would like to inspect the land cover. The opacity of land cover layer can be adjusted for switching the view between Landsat image or the land cover map. The point in map indicates the coordinate that you are providing the feedback for. You can drag the point marker or simply click on map to change the location of your comment. Please fill up the form below and press "submit" to submit your feedback.
-          </p>
-          <p>
-            Note: The field marked with * are mandatory. Name and email address are optional. We will only use them in case we need to get back to you on specifics regarding your feedback so that you can better assist us in improving the product.
-          </p>
-        </div>
         <form class="f12" id="feedbackForm" method="get">
           <div class="form-group">
             <label for="comments"><b>Your comments on selected point for selected year*</b></label>
@@ -85,6 +83,19 @@
         </div>
       </div>
     </div>
+    <div class="modal" tabindex="-1" role="dialog" id="infomodal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>The NLCMS Feedback System is a web portal where you can check the Nepal land cover maps pre-launched on 23rd August 2019. You can select the year for which you would like to inspect the land cover. The opacity of land cover layer can be adjusted for switching the view between Landsat image or the land cover map. The point in map indicates the coordinate that you are providing the feedback for. You can drag the point marker or simply click on map to change the location of your comment. Please fill up the form below and press "submit" to submit your feedback.
+            </p>
+            <p>
+              Note: The field marked with * are mandatory. Name and email address are optional. We will only use them in case we need to get back to you on specifics regarding your feedback so that you can better assist us in improving the product.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal" tabindex="-1" role="dialog" id="confirmmodal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -112,6 +123,8 @@
     <script src="https://unpkg.com/esri-leaflet@2.3.0/dist/esri-leaflet.js"
       integrity="sha512-1tScwpjXwwnm6tTva0l0/ZgM3rYNbdyMj5q6RSQMbNX6EUMhYDE3pMRGZaT41zHEvLoWEK7qFEJmZDOoDMU7/Q=="
       crossorigin=""></script>
+
+    <script src="L.Control.Opacity.js"></script>
 
     <script src="main.js"></script>
     <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div> -->

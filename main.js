@@ -64,7 +64,31 @@ function _timeChanged(e){
                     }),
     "Composite" : L.esri.dynamicMapLayer({
                       url: mapurl[1]
-                    })
+                    }),
+    "Districts" : L.esri.dynamicMapLayer({
+                      url:'http://geoapps.icimod.org/icimodarcgis/rest/services/Nepal/Admin/MapServer',
+                      dynamicLayers:[{
+                        "id": 1,
+                        "source":{"type":"mapLayer","mapLayerId":1},
+                        "drawingInfo":{
+                          "renderer":{
+                            "type":"simple",
+                            "symbol":{
+                              "type":"esriSFS",
+                              "outline":{
+                                "type":"esriSLS",
+                                "style":"esriSLSSolid",
+                                "color":[0,0,0,255],
+                                "width":2
+                              }
+                            },
+                            "label":"DNM",
+                            "description":''
+                          }
+                        }
+                      }]
+                    }),
+
   };
   L.control.layers({},layers).addTo(map);
   layers["Land Cover"].addTo(map);
